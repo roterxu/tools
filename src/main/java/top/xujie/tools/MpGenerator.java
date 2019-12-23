@@ -30,7 +30,11 @@ public class MpGenerator {
                 .setCapitalMode(true)
                 //这里结合了Lombok，所以设置为true，如果没有集成Lombok，可以设置为false
                 .setEntityLombokModel(true)
+                //生成指定表，若不设置，则所有表都生成  .setInclude("table1","table2")
+//                .setInclude("order_item")
                 .setNaming(NamingStrategy.underline_to_camel);
+
+
         //这里因为我是多模块项目，所以需要加上子模块的名称，以便直接生成到该目录下，如果是单模块项目，可以将后面的去掉
         String projectPath = System.getProperty("user.dir");
         // 自定义配置
