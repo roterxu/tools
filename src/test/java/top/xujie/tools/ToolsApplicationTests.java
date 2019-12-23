@@ -22,7 +22,6 @@ class ToolsApplicationTests {
     void contextLoads() {
         List<Student> list = studentService.list();
         System.out.println(list);
-
     }
 
 }
