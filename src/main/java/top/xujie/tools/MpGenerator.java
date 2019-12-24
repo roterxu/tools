@@ -18,12 +18,12 @@ import java.util.List;
 public class MpGenerator {
     public static void main(String[] args) {
         GlobalConfig config = new GlobalConfig();
-        String dbUrl = "jdbc:mysql://localhost:3306/students?useSSL=false";
+        String dbUrl = "jdbc:mysql://47.99.168.175:3310/students?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
                 .setUsername("root")
-                .setPassword("1234")
+                .setPassword("123456")
                 .setDriverName("com.mysql.jdbc.Driver");
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig
@@ -55,7 +55,7 @@ public class MpGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名
-                return projectPath + "/src/main/resources/mapper/" + "user"
+                return projectPath + "/src/main/resources/mapper/"
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
