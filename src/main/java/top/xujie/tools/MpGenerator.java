@@ -18,7 +18,7 @@ import java.util.List;
 public class MpGenerator {
     public static void main(String[] args) {
         GlobalConfig config = new GlobalConfig();
-        String dbUrl = "jdbc:mysql://47.99.168.175:3310/students?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
+        String dbUrl = "jdbc:mysql://47.99.168.175:3310/student?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
@@ -31,7 +31,7 @@ public class MpGenerator {
                 //这里结合了Lombok，所以设置为true，如果没有集成Lombok，可以设置为false
                 .setEntityLombokModel(true)
                 //生成指定表，若不设置，则所有表都生成  .setInclude("table1","table2")
-//                .setInclude("order_item")
+                .setInclude("sip_call_partition")
                 .setNaming(NamingStrategy.underline_to_camel);
 
 
