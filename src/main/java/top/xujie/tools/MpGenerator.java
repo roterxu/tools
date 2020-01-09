@@ -31,7 +31,7 @@ public class MpGenerator {
                 //这里结合了Lombok，所以设置为true，如果没有集成Lombok，可以设置为false
                 .setEntityLombokModel(true)
                 //生成指定表，若不设置，则所有表都生成  .setInclude("table1","table2")
-                .setInclude("sip_call_partition")
+                .setInclude("user")
                 .setNaming(NamingStrategy.underline_to_camel);
 
 
