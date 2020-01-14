@@ -1,8 +1,11 @@
 package top.xujie.tools.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import java.time.LocalDate;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
-
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -11,30 +14,27 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author xujie
- * @since 2019-12-24
+ * @since 2020-01-14
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String name;
+    private String studentName;
 
-    private Integer age;
+    private String studentClass;
 
-    private String phone;
+    private LocalDate studentBir;
 
-    private String mobileCity;
+    private String studentSex;
 
-    private String address;
+    private Integer studentAge;
 
-    private String birthday;
 
 }
