@@ -1,45 +1,65 @@
 package top.xujie.tools.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Map;
 
 /**
  * @author xujie
  */
 public class HttpClint {
 
-/**
+    public static String doGet(String url, Map<String, String> param) {
 
-*  java调用远程接口
-*
-*/
+        // 创建Httpclient对象
+        CloseableHttpClient httpclient = HttpClients.createDefault();
 
+        String resultString = "";
+        CloseableHttpResponse response = null;
+        try {
+            // 创建uri
+            URIBuilder builder = new URIBuilder(url);
+            if (param != null) {
+                for (String key : param.keySet()) {
+                    builder.addParameter(key, param.get(key));
+                }
+            }
+            URI uri = builder.build();
 
-    /*
-        依赖
-     <dependency>
-     <groupId>org.apache.httpcomponents</groupId>
-     <artifactId>httpclient</artifactId>
-     <version>4.3.6</version>
-     </dependency>
-     <dependency>
-     <groupId>org.apache.httpcomponents</groupId>
-     <artifactId>httpmime</artifactId>
-     <version>4.3.6</version>
-     </dependency>
-     <dependency>
-     <groupId>org.springframework</groupId>
-     <artifactId>spring-test</artifactId>
-     <version>5.1.10.RELEASE</version>
-     <scope>compile</scope>
-     </dependency>
-      */
+            // 创建http GET请求
+            HttpGet httpGet = new HttpGet(uri);
 
-		
-		
+            // 执行请求
+            response = httpclient.execute(httpGet);
+            // 判断返回状态是否为200
+            if (response.getStatusLine().getStatusCode() == 200) {
+                resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (response != null) {
+                    response.close();
+                }
+                httpclient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultString;
+    }
+
 
     public static String getCustomerCode(String phoneMd5) {
         String url = "http://192.168.1.65:9977/gamma/api/md52CustomerCode";
@@ -99,6 +119,7 @@ public class HttpClint {
 
     /**
      * 计算文件大小
+     *
      * @param size
      * @return
      */
