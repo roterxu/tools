@@ -10,11 +10,11 @@ spring:
     port: 6370
     timeout: 5000
     password: myredis
-  rabbitmq:
-    host: 47.99.168.175
-    port: 15672
-    username: guest
-    password: rabbitmq
+#  rabbitmq:
+#    host: 47.99.168.175
+#    port: 5672
+#    username: guest
+#    password: rabbitmq
 
 server:
   port: 8888

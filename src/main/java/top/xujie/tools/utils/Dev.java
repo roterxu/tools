@@ -1,6 +1,7 @@
 package top.xujie.tools.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Strings;
 import top.xujie.tools.entity.GirlFriend;
 
 import java.util.*;
@@ -12,37 +13,14 @@ import java.util.*;
 public class Dev {
 
     public static void main(String[] args) {
+        String str = "123,4233,4423,3424,";
 
-        GirlFriend girlFriend = GirlFriend.builder()
-                .age(18)
-                .name("小丽")
-                .height("168cm")
-                .weight("48kg")
-                .hairColor("浅棕色带点微卷")
-                .hobby("逛街,购物,买东西")
-                .gift("情人节礼物--阿玛尼红管唇釉")
-                .address("告诉你还不给我拐走了")
-                .birthday("2002-10-16")
-                .phone(" I would not tell you")
-                .email("Want to know someone's girlfriend's email?")
-                .build();
+        String[] labels = str.split(",");
 
-        System.out.println(girlFriend);
+        List<String> labelList = new ArrayList<>(Arrays.asList(str.split(",")));
 
-        Random random = new Random();
-
-        for (int i = 0; i <= 10000; i++) {
-            Map<String, String> param = new HashMap<>();
-
-            param.put("activityCode", "xujietest");
-            param.put("userCode", "jie" + random.nextInt(1000));
-            param.put("url", "http://www.baidu.com");
-            String doGet = HttpClint.doGet("http://114.55.28.228:8886/shortUrl", param);
-            JSONObject jsonObject = JSONObject.parseObject(doGet);
-            HttpClint.doGet(jsonObject.get("url").toString(), null);
-
+        for (String s : labelList) {
+            System.out.println(s);
         }
-
-
     }
 }

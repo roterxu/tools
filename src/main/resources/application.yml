@@ -15,7 +15,6 @@ spring:
     port: 5672
     username: guest
     password: rabbitmq
-
 server:
   port: 8888
 

@@ -1,12 +1,10 @@
 package top.xujie.tools.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import top.xujie.tools.service.impl.StudentServiceImpl;
 
 /**
@@ -17,16 +15,22 @@ import top.xujie.tools.service.impl.StudentServiceImpl;
  * @author xujie
  * @since 2020-01-14
  */
-@Controller
+@RestController
 @RequestMapping("/student")
 public class StudentController {
 
     @Autowired
     private StudentServiceImpl studentService;
 
-    @RequestMapping("/list")
-    @ResponseBody
-    public Object list() {
-        return studentService.list(new QueryWrapper<>());
+    @RequestMapping("/getStudent")
+    public Object getStudent(Integer id) {
+        return studentService.getStudent(id);
     }
+
+    @RequestMapping("/deleteStudent")
+    public Object removeStudent(Integer id){
+        studentService.deleteStudent(id);
+        return null;
+    }
+
 }

@@ -13,4 +13,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface StudentService extends IService<Student> {
 
+    /**
+     * 根据id查询学生
+     * @param id
+     * @return
+     */
+    Object getStudent(Integer id);
+
+    /**
+     * 删除学生信息
+     * @param id
+     */
+    void deleteStudent(Integer id);
 }

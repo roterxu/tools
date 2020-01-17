@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import top.xujie.tools.config.Sender;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author xujie
  */
@@ -58,8 +55,9 @@ public class RabbitmqController {
     @ResponseBody
     @RequestMapping("/topic")
     public String topic() {
-        sender.topicSend(null, null);
-        return null;
+        sender.topicSend("user.add", "测试topic");
+        sender.topicSend("order.add", "测试order/topic");
+        return "消息发送成功";
     }
 
 
