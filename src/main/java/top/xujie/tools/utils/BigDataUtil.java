@@ -10,6 +10,7 @@ import com.google.common.hash.Funnels;
 public class BigDataUtil {
 
     /**
+     * 可处理亿级数据
      * 布隆过滤器实例代码
      */
     public void testBloom() {

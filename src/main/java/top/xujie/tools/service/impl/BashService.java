@@ -1,14 +1,11 @@
 package top.xujie.tools.service.impl;
 
 
-import com.google.common.base.Charsets;
-import com.google.common.hash.BloomFilter;
-import com.google.common.hash.Funnels;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
-import top.xujie.tools.entity.FileResolveTemplate;
-import top.xujie.tools.entity.LineFormatTemplate;
+import top.xujie.tools.utils.FileResolveTemplate;
+import top.xujie.tools.utils.LineFormatTemplate;
 
 import java.io.*;
 import java.util.ArrayList;

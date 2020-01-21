@@ -1,4 +1,4 @@
-package top.xujie.tools.entity;
+package top.xujie.tools.utils;
 
 /**
  * @author jie.xu
