@@ -1,24 +1,62 @@
 package top.xujie.tools.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import java.io.*;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author xujie
  */
 public class HttpClint {
+    public static void main(String[] args) {
+        try {
+            CloseableHttpClient client = null;
+            CloseableHttpResponse response = null;
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                Map<String, Object> data = new HashMap<String, Object>();
+                data.put("code", "001");
+                data.put("name", "测试");
 
+                HttpPost httpPost = new HttpPost("http://localhost:8001/api/queryBlacklist");
+                httpPost.setHeader(HTTP.CONTENT_TYPE, "application/json");
+                httpPost.setEntity(new StringEntity(objectMapper.writeValueAsString(data),
+                        ContentType.create("text/json", "UTF-8")));
+
+                client = HttpClients.createDefault();
+                response = client.execute(httpPost);
+                HttpEntity entity = response.getEntity();
+                String result = EntityUtils.toString(entity);
+                System.out.println(result);
+            } finally {
+                if (response != null) {
+                    response.close();
+                }
+                if (client != null) {
+                    client.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static String doGet(String url, Map<String, String> param) {
 
         // 创建Httpclient对象

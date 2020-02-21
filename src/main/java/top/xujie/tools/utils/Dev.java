@@ -25,36 +25,11 @@ import java.util.*;
 public class Dev {
 
     public static void main(String[] args) throws IOException {
-        String longUrl = "www.baidu.com";
-        String activityCode = "活动2";
-        List<String> phones = new ArrayList<>();
-        for (int i = 0; i < 5000; i++) {
-            phones.add("1325555" + i);
-        }
-        Map<String, String> phoneMap = new HashMap<>();
-        int size = phones.size();
-        int maxSize = size - 1;
-        int limit = 499;
-        List<String> newList = new ArrayList<String>();
-        for (int i = 0; i < size; i++) {
-            newList.add(phones.get(i));
-            if (newList.size() == limit || i == maxSize) {
-                long start = System.currentTimeMillis();
-
-                Map<String, String> url = getUrl(longUrl, activityCode, phones);
-                phoneMap.putAll(url);
-                url.clear();
-                System.out.println(System.currentTimeMillis() - start);
-
-            }
-        }
-//
-//        for (Map.Entry<String, String> entry : phoneMap.entrySet()) {
-//            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
-//        }
-
-        System.out.println(phoneMap.size());
-
+      String str="{\"#尾号#\":\" 8666 \",\"#短链#\":\" https://dx10.cn/LlO \"}";
+        System.out.println(str);
+        JSONObject jsonObject=JSON.parseObject(str);
+        System.out.println(jsonObject.get("#短链#"));
+        System.out.println(jsonObject.get("#尾号#"));
     }
 
     private static Map<String, String> getUrl(String longUrl, String activityCode, List<String> phoneList) throws IOException {
