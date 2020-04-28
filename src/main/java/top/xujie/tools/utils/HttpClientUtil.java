@@ -144,62 +144,8 @@ public class HttpClientUtil {
         return resultString;
     }
 
-    public static void main(String[] args) throws Exception {
-        List<String> strings = testBlack();
-        String phoneString = listToString(strings, ',');
-        String accessKey = "test1";
-        String accessSecret = "test1";
-        requestBlackList(phoneString,accessKey,accessSecret);
-    }
-
-    private static void requestBlackList(String phoneString,String accessKey,String accessSecret) throws Exception {
-
-        long start=System.currentTimeMillis();
-        String url = "https://api.huiyu.org.cn/api/queryBlacklist";
-        long timestamp = System.currentTimeMillis();
-
-        String sign = DigestUtils.md5Hex(accessKey + accessSecret + timestamp);
-
-        Map<String, String> map = new HashMap<>();
-        map.put("accessKey", accessKey);
-        map.put("timestamp", String.valueOf(timestamp));
-        map.put("sign", sign);
-        map.put("phones", phoneString);
-
-        String json = HttpClientUtil.doPost(url, map);
-
-        System.out.println(json);
-        long end=System.currentTimeMillis();
-        System.out.println(end-start);
-    }
-
-    public static List<String> testBlack() {
-        List<Integer> phones = Collections.singletonList(130);
-//        String path = "/mnt/d6/phone-sha256/phone-sha256.txt";
-        Random random = new Random();
-        List<String> phonesList = new ArrayList<>();
-
-        for (Integer phone : phones) {
-
-            String head = String.valueOf(phone);
-            long start = Long.parseLong(head + "00000000");
-            long end = Long.parseLong(head + "00050000");
-            for (long i = start; i < end; i++) {
-                phonesList.add(String.valueOf(i + random.nextInt(99999999)));
-            }
-        }
-        return phonesList;
-    }
-
-    public static String listToString(List list, char separator) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i)).append(separator);
-        }
-        return sb.toString().substring(0, sb.toString().length() - 1);
-    }
-
     private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom().setSocketTimeout(300000).setConnectTimeout(300000).build();
+
     public static String doPost(String url, Map<String, String> paramsMap) throws Exception {
         List<NameValuePair> params = new ArrayList<>();
         for (Map.Entry<String, String> entry : paramsMap.entrySet()) {

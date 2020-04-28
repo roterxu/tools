@@ -149,5 +149,31 @@ public class BashService {
         }
     }
 
+    public static void main(String[] args) throws InterruptedException, ExecutionException, IOException {
+        BashService bashService=new BashService();
+        String path = "C:\\tmp\\test/";
+        List fileList = getFileList(path);
+        String resultPath = "c:/tmp/result.txt";
+        for (Object obj : fileList) {
+            bashService.resolve(obj.toString(), 5000, lines -> {
+                bashService.write(resultPath, lines);
+            });
+        }
+    }
+
+
+    public static List getFileList(String path) {
+        List list = new ArrayList();
+        try {
+            File file = new File(path);
+            String[] filelist = file.list();
+            for (int i = 0; i < filelist.length; i++) {
+                list.add(path + "\\" + filelist[i]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 }
